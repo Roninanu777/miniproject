@@ -19,7 +19,7 @@ const PurchaseDetails = (props) => {
 
   const total = () => {
     let c = parseInt(cost);
-    return c + c * 0.2;
+    return (c + c * 0.2).toFixed(2);
   };
 
   return (
