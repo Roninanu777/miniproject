@@ -8,8 +8,6 @@ function App() {
   const [status, setStatus] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  const postData = () => {};
-
   return (
     <Router>
       <div className="App">
@@ -22,6 +20,7 @@ function App() {
               </button>
             </div>
           </Route>
+          //Not a protected route right now
           <Route exact path="/purchase-details">
             <PurchaseDetails />
           </Route>
@@ -29,11 +28,6 @@ function App() {
       </div>
     </Router>
   );
-  // return (
-  //   <div className="App">
-  //     <PurchaseDetails />
-  //   </div>
-  // );
 }
 
 export default App;
