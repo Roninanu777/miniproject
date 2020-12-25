@@ -4,6 +4,7 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import "./project.css";
 import axios from "axios";
 
+// Custorm form validator
 const validator = (name, value) => {
   if (name == "name") {
     if (value.length > 80) {
@@ -32,6 +33,7 @@ const validator = (name, value) => {
     }
   }
 };
+//---------------------------------------------------------------
 
 const CreateProject = (props) => {
   const { closeModal } = props;
@@ -50,6 +52,7 @@ const CreateProject = (props) => {
     flag: false,
   });
 
+  // Submit handler
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!error.flag) {
@@ -64,6 +67,7 @@ const CreateProject = (props) => {
     }
   };
 
+  // Onchange handler
   const handleChange = (e) => {
     const { name, value } = e.target;
     let err = validator(name, value);
@@ -75,6 +79,7 @@ const CreateProject = (props) => {
     }
   };
 
+  // Total cost calculator
   const total = () => {
     let c = parseFloat(options.cost);
     return c + c * 0.2;
