@@ -6,10 +6,12 @@ import "./modal.css";
 const Modal = (props) => {
   const [step, setStep] = useState(1);
 
+  // Increment
   const next = () => {
     setStep((prev) => prev + 1);
   };
 
+  // Switch case function to render conditionally
   const switchSteps = (step) => {
     switch (step) {
       case 1:
