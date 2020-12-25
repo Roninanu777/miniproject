@@ -11,12 +11,14 @@ import "./purchase.css";
 const PurchaseDetails = (props) => {
   const [cost, setCost] = useState("0");
 
+  // ComponentDidMount hook for fetching data on page load
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_BASE_URL}/project`).then((resp) => {
       setCost(resp.data.cost);
     });
   }, []);
 
+  //Total cost calculator
   const total = () => {
     let c = parseInt(cost);
     return (c + c * 0.2).toFixed(2);
