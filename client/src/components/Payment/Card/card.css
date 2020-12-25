@@ -1,0 +1,30 @@
+.visa {
+  width: 55px;
+  height: 35px;
+}
+
+.visa img {
+  width: 100%;
+  height: auto;
+  margin-left: 1rem;
+}
+
+.check {
+  display: flex;
+  align-items: center;
+}
+
+.card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+}
+
+.card p {
+  color: #505050;
+  margin-right: 0.2rem;
+}
