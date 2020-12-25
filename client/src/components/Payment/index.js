@@ -65,14 +65,14 @@ const Payment = (props) => {
             <p>Add card </p>
           </div>
         </div>
-        <button id="payBtn" type="submit">
-          <Link
-            style={{ textDecoration: "none", color: "white" }}
-            to="/purchase-details"
-          >
+        <Link
+          style={{ textDecoration: "none", color: "white" }}
+          to="/purchase-details"
+        >
+          <button id="payBtn" type="submit">
             Pay
-          </Link>
-        </button>
+          </button>
+        </Link>
       </form>
     </>
   );
