@@ -87,12 +87,17 @@ const CreateProject = (props) => {
           <div className="fee">
             <p>CleverX transaction fees (20%)</p>
             <span className="cost">
-              ${parseFloat(options.cost) * 0.2 || "0.00"}
+              $
+              {parseInt(options.cost) > 0
+                ? (parseFloat(options.cost) * 0.2).toFixed(2)
+                : "0.00"}
             </span>
           </div>
           <div className="fee">
             <p>Total amount in $USD</p>
-            <span className="cost">${total() || "0.00"}</span>
+            <span className="cost">
+              ${parseInt(options.cost) > 0 ? total().toFixed(2) : "0.00"}
+            </span>
           </div>
         </div>
         <button id="projectBtn" type="submit">
