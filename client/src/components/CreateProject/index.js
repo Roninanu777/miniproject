@@ -4,6 +4,35 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import "./project.css";
 import axios from "axios";
 
+const validator = (name, value) => {
+  if (name == "name") {
+    if (value.length > 80) {
+      return true;
+    } else {
+      return false;
+    }
+  } else if (name == "summary") {
+    if (value.length > 200) {
+      return true;
+    } else {
+      return false;
+    }
+  } else if (name == "date") {
+    let now = new Date().toLocaleDateString("en-CA");
+    if (value < now) {
+      return true;
+    } else {
+      return false;
+    }
+  } else if (name == "cost") {
+    if (parseFloat(value) < 100 || parseFloat(value) > 100000) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+};
+
 const CreateProject = (props) => {
   const { closeModal } = props;
   const [options, setOptions] = useState({
@@ -13,22 +42,37 @@ const CreateProject = (props) => {
     cost: "",
   });
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState({
+    name: false,
+    summary: false,
+    date: false,
+    cost: false,
+    flag: false,
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
-    axios
-      .post(`${process.env.REACT_APP_BASE_URL}/project`, { ...options })
-      .then((response) => {
-        setLoading(false);
-        props.next();
-      })
-      .catch((err) => console.log(err));
+    if (!error.flag) {
+      setLoading(true);
+      axios
+        .post(`${process.env.REACT_APP_BASE_URL}/project`, { ...options })
+        .then((response) => {
+          setLoading(false);
+          props.next();
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setOptions((prevState) => ({ ...prevState, [name]: value }));
+    let err = validator(name, value);
+    if (err) {
+      setError((prev) => ({ ...prev, [name]: true, flag: true }));
+    } else {
+      setError((prev) => ({ ...prev, [name]: false, flag: false }));
+      setOptions((prevState) => ({ ...prevState, [name]: value }));
+    }
   };
 
   const total = () => {
@@ -61,20 +105,29 @@ const CreateProject = (props) => {
             name="name"
             placeholder="Title"
           />
+          {error.name ? (
+            <small className="error">*Characters exceedeed!</small>
+          ) : null}
           <textarea
             name="summary"
             required
             onChange={handleChange}
             placeholder="Description"
           ></textarea>
+          {error.summary ? (
+            <small className="error">*Characters exceeded!</small>
+          ) : null}
           <input type="text" disabled placeholder="Upload attachment" />
           <input
-            type="text"
+            type="date"
             onChange={handleChange}
             required
             name="date"
             placeholder="Delivery date"
           />
+          {error.date ? (
+            <small className="error">*Select only future dates</small>
+          ) : null}
           <input
             type="text"
             onChange={handleChange}
@@ -82,6 +135,9 @@ const CreateProject = (props) => {
             name="cost"
             placeholder="Project cost"
           />
+          {error.cost ? (
+            <small className="error">*Enter from $100 - $100000</small>
+          ) : null}
         </div>
         <div className="addinfo">
           <div className="fee">
