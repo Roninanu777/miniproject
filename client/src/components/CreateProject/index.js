@@ -31,6 +31,11 @@ const CreateProject = (props) => {
     setOptions((prevState) => ({ ...prevState, [name]: value }));
   };
 
+  const total = () => {
+    let c = parseFloat(options.cost);
+    return c + c * 0.2;
+  };
+
   return (
     <>
       <div className="head">
@@ -81,11 +86,13 @@ const CreateProject = (props) => {
         <div className="addinfo">
           <div className="fee">
             <p>CleverX transaction fees (20%)</p>
-            <span className="cost">$0.00</span>
+            <span className="cost">
+              ${parseFloat(options.cost) * 0.2 || "0.00"}
+            </span>
           </div>
           <div className="fee">
             <p>Total amount in $USD</p>
-            <span className="cost">$0.00</span>
+            <span className="cost">${total() || "0.00"}</span>
           </div>
         </div>
         <button id="projectBtn" type="submit">
