@@ -9,6 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
+// Taking a static array to mimic data from database
 let cards = [
   { id: 0, selected: true, endnum: 2345 },
   { id: 1, selected: false, endnum: 7645 },
@@ -18,6 +19,7 @@ const Payment = (props) => {
   const { closeModal } = props;
   const [focus, setFocus] = useState([...cards]);
 
+  // Select checker
   const handleClick = (item) => {
     let arr = [...focus];
     arr.forEach((ele) => {
