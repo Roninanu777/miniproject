@@ -6,7 +6,6 @@ import "./App.css";
 
 function App() {
   const [status, setStatus] = useState(false);
-  const [loading, setLoading] = useState(true);
 
   return (
     <Router>
