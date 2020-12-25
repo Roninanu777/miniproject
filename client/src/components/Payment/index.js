@@ -7,6 +7,7 @@ import {
   faTimes,
   faPlus,
 } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 let cards = [
   { id: 0, selected: true, endnum: 2345 },
@@ -63,7 +64,12 @@ const Payment = (props) => {
           </div>
         </div>
         <button id="payBtn" type="submit">
-          Pay
+          <Link
+            style={{ textDecoration: "none", color: "white" }}
+            to="/purchase-details"
+          >
+            Pay
+          </Link>
         </button>
       </form>
     </>
