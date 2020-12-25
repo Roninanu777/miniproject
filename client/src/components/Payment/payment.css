@@ -1,0 +1,47 @@
+.main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.off {
+  color: #5e5e5e;
+  padding: 0;
+  cursor: pointer;
+  border: 0;
+  font-size: 1.6rem;
+}
+
+#payBtn {
+  padding: 1rem 3rem;
+  border: none;
+  border-radius: 5px;
+  background-color: blue;
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1.1rem;
+  outline: none;
+  box-shadow: 0px 3px 3px 1px #c8d0d6;
+}
+
+.addCard {
+  padding: 0 1rem;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  border: 2px solid #e1e1e1;
+  margin-bottom: 4rem;
+}
+
+.add {
+  margin-left: 2.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.add p {
+  margin-left: 0.5rem;
+  color: #555555;
+}
