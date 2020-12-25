@@ -1,13 +1,27 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFileAlt,
   faCalendarAlt,
   faFolder,
 } from "@fortawesome/free-regular-svg-icons";
+import axios from "axios";
 import "./purchase.css";
 
 const PurchaseDetails = (props) => {
+  const [cost, setCost] = useState("0");
+
+  useEffect(() => {
+    axios.get(`${process.env.REACT_APP_BASE_URL}/project`).then((resp) => {
+      setCost(resp.data.cost);
+    });
+  }, []);
+
+  const total = () => {
+    let c = parseInt(cost);
+    return c + c * 0.2;
+  };
+
   return (
     <section className="purchase-container">
       <div className="prequest">
@@ -21,8 +35,8 @@ const PurchaseDetails = (props) => {
       <div className="cost-block">
         <p className="quote">I'll be your business expert</p>
         <div className="cost-info">
-          <span>$20</span>
-          <p>Total : $24</p>
+          <span>${`${cost}`}</span>
+          <p>Total : ${total()}</p>
           <p>(CleverX fee + 20%)</p>
         </div>
       </div>
