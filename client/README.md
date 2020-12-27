@@ -1,70 +1,133 @@
-# Getting Started with Create React App
+# Getting started
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+First make a `.env` file inside the client folder and type in the following environment variable
 
-## Available Scripts
+```
+REACT_APP_BASE_URL = http://localhost:3000
+```
 
-In the project directory, you can run:
+**Note: Environment variables in CRA should always start with `REACT_APP_`**
 
-### `npm start`
+After creating the `.env` file open the terminal and type the following command
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```
+$ npm install
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+This will install all the necessary dependencies.
 
-### `npm test`
+# Dependencies
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Apart from the CRA dependencies this project uses:
 
-### `npm run build`
+1. [react-router-dom](https://www.npmjs.com/package/react-router-dom) for routing through pages.
+2. [axios](https://www.npmjs.com/package/axios) for making http request.
+3. [@fortawesome/react-fontawesome](https://www.npmjs.com/package/@fortawesome/react-fontawesome) for icons.
+   - [@fortawesome/free-regular-svg-icons](https://www.npmjs.com/package/@fortawesome/free-regular-svg-icons) for regular svg icons.
+   - [@fortawesome/free-solid-svg-icons](https://www.npmjs.com/package/@fortawesome/free-solid-svg-icons) for solid svg icons.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Scripts
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 1. `start`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Open the terminal and type the following command to start the react app
 
-### `npm run eject`
+```
+$ npm start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+This will the the app on port 3000 by default or a different port if port 3000 is not available.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 2. `build`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+To make a production build open the terminal and type in the following command
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```
+$ npm build
+```
 
-## Learn More
+This will create a `build` folder which is production ready.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# Code walkthrough
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Inside the `/src/components` folder there are directories for each components which consists of a `index.js` file for the component and a `stylesheet` file for styles of the particular component.
 
-### Code Splitting
+## 1. App.js
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The main file for the application is `App.js` (excluding `index.js` which is the entry file) which is in the root of `src`. It contains basic routing for pages.
 
-### Analyzing the Bundle Size
+```JSX
+  <Switch>
+    <Route exact path="/">
+      {status && <Modal closeModal={() => setStatus(false)} />}
+      <div className="container">
+        <button id="modal-trigger" onClick={() => setStatus(true)}>
+          Open Modal
+        </button>
+      </div>
+    </Route>
+    //Not a protected route right now
+    <Route exact path="/purchase-details">
+      <PurchaseDetails />
+    </Route>
+  </Switch>
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+The `<Switch>` allows us to render the first page that matches the `path` in `<Route>`. The `exact` props in route checks whether the entered route matches the `path` props exactly. Also there is an unprotected route `/purchase-details` which can be protected using authentication for deploying it to production.
 
-### Making a Progressive Web App
+## 2. CreateProject/index.js
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+This component handles the form for creating a project. It has `controlled input` which has a `handleChange` method hooked into the `onChange` props. Also for validation there is a custom form validator `validator(name, value)` function that checks whether the entered value meets the necessary requirements or not. The error messages are conditionally rendered as
 
-### Advanced Configuration
+```html
+- - - - - - - - - - - - - - - - - -
+<input
+  type="text"
+  autofocus
+  required
+  autocomplete="off"
+  onChange="{handleChange}"
+  name="name"
+  placeholder="Title"
+/>
+{error.name ? (<small className="error">*Characters exceedeed!</small>) : null}
+- - - - - - - - - - - - - - - - - -
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+A function `handleChange` is hooked into the `onSubmit` props of the `form` which on submission makes a **POST** request to the `/project` route with the request body as
 
-### Deployment
+```JSON
+{
+  "name": "Mini Project",
+  "summary": "This is a react mini project",
+  "date": "2020-12-26",
+  "cost": "405"
+}
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 3. Modal/index.js
 
-### `npm run build` fails to minify
+This a modal component which triggers when we click the `Open Modal` button. It has a `switch` case which returns components based on the case number. Also we can scale the form to add more pages in between the modal by simply adding more cases.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```Javascript
+switch (step) {
+  case 1:
+    return <CreateProject next={next} closeModal={props.closeModal} />;
+
+  case 2:
+    return <Payment closeModal={props.closeModal} />;
+
+  default:
+    return <></>;
+}
+```
+
+It receives a props `closeModal` from the parent that is hooked into the `X` icon to close the modal.
+
+## 4. Payment/index.js
+
+This is just a static component for now but can be made dynamic when connected to a database. Clicking the button `Pay` routes the page to `/purchase-details`.
+
+## 5. PurchaseDetails/index.js
+
+This is the order page which has the cost details in it. It uses a `useEffect` hook that runs once the component mounts. It fetches the details by making a **GET** request to the `/project` endpoint.
