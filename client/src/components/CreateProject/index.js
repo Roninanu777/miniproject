@@ -29,7 +29,7 @@ const validator = (name, value) => {
     if (
       parseFloat(value) < 100 ||
       parseFloat(value) > 100000 ||
-      !/[0-9]./g.test(value)
+      !/^[0-9]+$/.test(value)
     ) {
       return true;
     } else {
