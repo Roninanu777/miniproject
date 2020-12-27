@@ -26,7 +26,11 @@ const validator = (name, value) => {
       return false;
     }
   } else if (name == "cost") {
-    if (parseFloat(value) < 100 || parseFloat(value) > 100000) {
+    if (
+      parseFloat(value) < 100 ||
+      parseFloat(value) > 100000 ||
+      !/[0-9]./g.test(value)
+    ) {
       return true;
     } else {
       return false;
