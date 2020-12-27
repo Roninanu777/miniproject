@@ -47,7 +47,7 @@ input[type="text"] {
   padding: 1rem;
   outline: none;
   margin: 1rem 0;
-  color: #474747;
+  color: #000000;
   border: 1px solid #eeeeee;
   border-radius: 5px;
   font-size: 1rem;
@@ -62,7 +62,7 @@ input[type="date"] {
   border-radius: 5px;
   font-size: 1rem;
   content: attr(placeholder);
-  color: #474747;
+  color: #000000;
   appearance: none;
 }
 
@@ -75,7 +75,7 @@ input[type="date"] {
 }
 input[type="date"]:focus,
 input[type="date"]:valid {
-  color: #474747;
+  color: #000000;
 }
 input[type="date"]:focus::before,
 input[type="date"]:valid::before {
@@ -107,7 +107,7 @@ textarea {
   border: 1px solid #eeeeee;
   border-radius: 5px;
   font-size: 1rem;
-  color: #474747;
+  color: #000000;
 }
 
 textarea:focus {
