@@ -110,6 +110,7 @@ const CreateProject = (props) => {
             type="text"
             autoFocus
             required
+            autoComplete="off"
             onChange={handleChange}
             name="name"
             placeholder="Title"
@@ -120,6 +121,7 @@ const CreateProject = (props) => {
           <textarea
             name="summary"
             required
+            autoComplete="off"
             onChange={handleChange}
             placeholder="Description"
           ></textarea>
@@ -141,6 +143,7 @@ const CreateProject = (props) => {
             type="text"
             onChange={handleChange}
             required
+            autoComplete="off"
             name="cost"
             placeholder="Project cost"
           />
