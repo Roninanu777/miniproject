@@ -124,10 +124,10 @@ const CreateProject = (props) => {
           ) : null}
           <input type="text" disabled placeholder="Upload attachment" />
           <input
-            type="date"
             onChange={handleChange}
             required
             name="date"
+            type="date"
             placeholder="Delivery date"
           />
           {error.date ? (
